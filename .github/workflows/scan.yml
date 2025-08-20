@@ -34,7 +34,10 @@ jobs:
         env:
           DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: "(releaseCompile|runtime)Classpath" # Only include relevant configurations
 
-
       - name: Dependency Review
         if: github.event_name == 'pull_request'
         uses: actions/dependency-review-action@v4
+        with:
+          retry-on-snapshot-warnings: true
+          retry-on-snapshot-warnings-timeout: 60
+          comment-summary-in-pr: always
